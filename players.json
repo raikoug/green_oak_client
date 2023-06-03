@@ -1,0 +1,4 @@
+[
+  {"circolo": "cucito",    "cognome": "congome 1",    "ex": "bersagliere",    "fastidio": 3,    "hobby": "cucito",    "id": 1,    "name": "Nome1",    "necrologio": false,    "parole_sagge": false,    "pensionato": "killer",    "pettegolezzi": [],    "pettegolezzo": false,    "scenata": false,    "scenate_fatte": 0,    "soprannome": "pio",    "spocchia": 0},
+  {"circolo": "droga",    "cognome": "sereno",    "ex": "ciclista",    "fastidio": 0,    "hobby": "droga",    "id": 2,    "name": "paolo",    "necrologio": false,    "parole_sagge": false,    "pensionato": "allenatore",    "pettegolezzi": [],    "pettegolezzo": false,    "scenata": false,    "scenate_fatte": 0,    "soprannome": "serenino",    "spocchia": 2}
+]

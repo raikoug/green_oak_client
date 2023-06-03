@@ -1,0 +1,202 @@
+[
+    {
+        "seme": "bastoni",
+        "value": 1,
+        "path": "./Assets/carte/bastoni1.png"
+    },
+    {
+        "seme": "bastoni",
+        "value": 10,
+        "path": "./Assets/carte/bastoni10.png"
+    },
+    {
+        "seme": "bastoni",
+        "value": 2,
+        "path": "./Assets/carte/bastoni2.png"
+    },
+    {
+        "seme": "bastoni",
+        "value": 3,
+        "path": "./Assets/carte/bastoni3.png"
+    },
+    {
+        "seme": "bastoni",
+        "value": 4,
+        "path": "./Assets/carte/bastoni4.png"
+    },
+    {
+        "seme": "bastoni",
+        "value": 5,
+        "path": "./Assets/carte/bastoni5.png"
+    },
+    {
+        "seme": "bastoni",
+        "value": 6,
+        "path": "./Assets/carte/bastoni6.png"
+    },
+    {
+        "seme": "bastoni",
+        "value": 7,
+        "path": "./Assets/carte/bastoni7.png"
+    },
+    {
+        "seme": "bastoni",
+        "value": 8,
+        "path": "./Assets/carte/bastoni8.png"
+    },
+    {
+        "seme": "bastoni",
+        "value": 9,
+        "path": "./Assets/carte/bastoni9.png"
+    },
+    {
+        "seme": "coppe",
+        "value": 1,
+        "path": "./Assets/carte/coppe1.png"
+    },
+    {
+        "seme": "coppe",
+        "value": 10,
+        "path": "./Assets/carte/coppe10.png"
+    },
+    {
+        "seme": "coppe",
+        "value": 2,
+        "path": "./Assets/carte/coppe2.png"
+    },
+    {
+        "seme": "coppe",
+        "value": 3,
+        "path": "./Assets/carte/coppe3.png"
+    },
+    {
+        "seme": "coppe",
+        "value": 4,
+        "path": "./Assets/carte/coppe4.png"
+    },
+    {
+        "seme": "coppe",
+        "value": 5,
+        "path": "./Assets/carte/coppe5.png"
+    },
+    {
+        "seme": "coppe",
+        "value": 6,
+        "path": "./Assets/carte/coppe6.png"
+    },
+    {
+        "seme": "coppe",
+        "value": 7,
+        "path": "./Assets/carte/coppe7.png"
+    },
+    {
+        "seme": "coppe",
+        "value": 8,
+        "path": "./Assets/carte/coppe8.png"
+    },
+    {
+        "seme": "coppe",
+        "value": 9,
+        "path": "./Assets/carte/coppe9.png"
+    },
+    {
+        "seme": "denara",
+        "value": 1,
+        "path": "./Assets/carte/denara1.png"
+    },
+    {
+        "seme": "denara",
+        "value": 10,
+        "path": "./Assets/carte/denara10.png"
+    },
+    {
+        "seme": "denara",
+        "value": 2,
+        "path": "./Assets/carte/denara2.png"
+    },
+    {
+        "seme": "denara",
+        "value": 3,
+        "path": "./Assets/carte/denara3.png"
+    },
+    {
+        "seme": "denara",
+        "value": 4,
+        "path": "./Assets/carte/denara4.png"
+    },
+    {
+        "seme": "denara",
+        "value": 5,
+        "path": "./Assets/carte/denara5.png"
+    },
+    {
+        "seme": "denara",
+        "value": 6,
+        "path": "./Assets/carte/denara6.png"
+    },
+    {
+        "seme": "denara",
+        "value": 7,
+        "path": "./Assets/carte/denara7.png"
+    },
+    {
+        "seme": "denara",
+        "value": 8,
+        "path": "./Assets/carte/denara8.png"
+    },
+    {
+        "seme": "denara",
+        "value": 9,
+        "path": "./Assets/carte/denara9.png"
+    },
+    {
+        "seme": "spade",
+        "value": 1,
+        "path": "./Assets/carte/spade1.png"
+    },
+    {
+        "seme": "spade",
+        "value": 10,
+        "path": "./Assets/carte/spade10.png"
+    },
+    {
+        "seme": "spade",
+        "value": 2,
+        "path": "./Assets/carte/spade2.png"
+    },
+    {
+        "seme": "spade",
+        "value": 3,
+        "path": "./Assets/carte/spade3.png"
+    },
+    {
+        "seme": "spade",
+        "value": 4,
+        "path": "./Assets/carte/spade4.png"
+    },
+    {
+        "seme": "spade",
+        "value": 5,
+        "path": "./Assets/carte/spade5.png"
+    },
+    {
+        "seme": "spade",
+        "value": 6,
+        "path": "./Assets/carte/spade6.png"
+    },
+    {
+        "seme": "spade",
+        "value": 7,
+        "path": "./Assets/carte/spade7.png"
+    },
+    {
+        "seme": "spade",
+        "value": 8,
+        "path": "./Assets/carte/spade8.png"
+    },
+    {
+        "seme": "spade",
+        "value": 9,
+        "path": "./Assets/carte/spade9.png"
+    }
+]
