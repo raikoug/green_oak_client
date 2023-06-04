@@ -43,7 +43,6 @@ class command_frame(customtkinter.CTkFrame):
         self.salva_players.grid(row=row, column=0, padx=10, pady=(10, 0), sticky="ew")
         row += 1
 
-
 class players_frame(customtkinter.CTkFrame):
     def __init__(self, master):
         super().__init__(master)
@@ -95,14 +94,12 @@ class players_frame(customtkinter.CTkFrame):
         class parole_sagge:
             pass
 
-
-    
     def add_player(self, player: Player):
         setattr(self.check_box_values.fastidio, f'{player.id}', customtkinter.IntVar())
         setattr(self.check_box_values.spocchia, f'{player.id}', customtkinter.IntVar())
         setattr(self.check_box_values.scenate_fatte, f'{player.id}', customtkinter.IntVar())
-        setattr(self.check_box_values.necrologio, f'{player.id}', customtkinter.IntVar())
-        setattr(self.check_box_values.parole_sagge, f'{player.id}', customtkinter.IntVar())
+        setattr(self.check_box_values.necrologio, f'{player.id}', customtkinter.BooleanVar())
+        setattr(self.check_box_values.parole_sagge, f'{player.id}', customtkinter.BooleanVar())
         
         fastidio_cb = getattr(self.check_box_values.fastidio, f'{player.id}')
         spocchia_cb = getattr(self.check_box_values.spocchia, f'{player.id}')
@@ -121,22 +118,22 @@ class players_frame(customtkinter.CTkFrame):
 
         self.players_id[player.id]['fastidio_1'] = customtkinter.CTkCheckBox(self, text="", width=1, 
                                                                              command=lambda: self.master.checkbox_toggle(player, "fastidio"), 
-                                                                             variable=fastidio_cb, onvalue=1  , offvalue=-1)
+                                                                             variable=fastidio_cb, onvalue=1  , offvalue=0)
         self.players_id[player.id]['fastidio_1'].grid(row=self.player_row, column=1, padx=0, pady=0, sticky="w")
 
         self.players_id[player.id]['fastidio_2'] = customtkinter.CTkCheckBox(self, text="", width=1, 
                                                                              command=lambda: self.master.checkbox_toggle(player, "fastidio"), 
-                                                                             variable=fastidio_cb, onvalue=2  , offvalue=-2)
+                                                                             variable=fastidio_cb, onvalue=2  , offvalue=-1)
         self.players_id[player.id]['fastidio_2'].grid(row=self.player_row, column=2, padx=0, pady=0, sticky="w")
 
         self.players_id[player.id]['fastidio_3'] = customtkinter.CTkCheckBox(self, text="", width=1, 
                                                                              command=lambda: self.master.checkbox_toggle(player, "fastidio"), 
-                                                                             variable=fastidio_cb, onvalue=3  , offvalue=-3)
+                                                                             variable=fastidio_cb, onvalue=3  , offvalue=-2)
         self.players_id[player.id]['fastidio_3'].grid(row=self.player_row, column=3, padx=0, pady=0, sticky="w")
 
         self.players_id[player.id]['fastidio_4'] = customtkinter.CTkCheckBox(self, text="", width=1, 
                                                                              command=lambda: self.master.checkbox_toggle(player, "fastidio"), 
-                                                                             variable=fastidio_cb, onvalue=4  , offvalue=-4)
+                                                                             variable=fastidio_cb, onvalue=4  , offvalue=-3)
         self.players_id[player.id]['fastidio_4'].grid(row=self.player_row, column=4, padx=0, pady=0, sticky="w")
 
         # 1 CTkCheckBox Scenata
@@ -146,19 +143,19 @@ class players_frame(customtkinter.CTkFrame):
         # 4 CTkCheckBox Spocchia
         self.players_id[player.id]['spocchia_1'] = customtkinter.CTkCheckBox(self, text="", width=1, 
                                                                              command=lambda: self.master.checkbox_toggle(player, "spocchia"), 
-                                                                             variable=spocchia_cb, onvalue=1  , offvalue=-1)
+                                                                             variable=spocchia_cb, onvalue=1  , offvalue=0)
         self.players_id[player.id]['spocchia_1'].grid(row=self.player_row, column=6, padx=0, pady=0, sticky="w")
         self.players_id[player.id]['spocchia_2'] = customtkinter.CTkCheckBox(self, text="", width=1, 
                                                                              command=lambda: self.master.checkbox_toggle(player, "spocchia"), 
-                                                                             variable=spocchia_cb, onvalue=2  , offvalue=-2)
+                                                                             variable=spocchia_cb, onvalue=2  , offvalue=-1)
         self.players_id[player.id]['spocchia_2'].grid(row=self.player_row, column=7, padx=0, pady=0, sticky="w")
         self.players_id[player.id]['spocchia_3'] = customtkinter.CTkCheckBox(self, text="", width=1, 
                                                                              command=lambda: self.master.checkbox_toggle(player, "spocchia"), 
-                                                                             variable=spocchia_cb, onvalue=3  , offvalue=-3)
+                                                                             variable=spocchia_cb, onvalue=3  , offvalue=-2)
         self.players_id[player.id]['spocchia_3'].grid(row=self.player_row, column=8, padx=0, pady=0, sticky="w")
         self.players_id[player.id]['spocchia_4'] = customtkinter.CTkCheckBox(self, text="", width=1, 
                                                                              command=lambda: self.master.checkbox_toggle(player, "spocchia"), 
-                                                                             variable=spocchia_cb, onvalue=4  , offvalue=-4)
+                                                                             variable=spocchia_cb, onvalue=4  , offvalue=-3)
         self.players_id[player.id]['spocchia_4'].grid(row=self.player_row, column=9, padx=0, pady=0, sticky="w")
 
         # 1 CTkCheckBox Pettegolezzo
@@ -168,27 +165,27 @@ class players_frame(customtkinter.CTkFrame):
         # 3 CTkCheckBox Scenate fatte
         self.players_id[player.id]['scenate_fatte_1'] = customtkinter.CTkCheckBox(self, text="", width=1, 
                                                                              command=lambda: self.master.checkbox_toggle(player, "scenate_fatte"), 
-                                                                             variable=scenate_fatte_cb, onvalue=1  , offvalue=-1)
+                                                                             variable=scenate_fatte_cb, onvalue=1  , offvalue=0)
         self.players_id[player.id]['scenate_fatte_1'].grid(row=self.player_row, column=11, padx=0, pady=0, sticky="w")
         self.players_id[player.id]['scenate_fatte_2'] = customtkinter.CTkCheckBox(self, text="", width=1, 
                                                                              command=lambda: self.master.checkbox_toggle(player, "scenate_fatte"), 
-                                                                             variable=scenate_fatte_cb, onvalue=2  , offvalue=-2)
+                                                                             variable=scenate_fatte_cb, onvalue=2  , offvalue=-1)
         self.players_id[player.id]['scenate_fatte_2'].grid(row=self.player_row, column=12, padx=0, pady=0, sticky="w")
         self.players_id[player.id]['scenate_fatte_3'] = customtkinter.CTkCheckBox(self, text="", width=1, 
                                                                              command=lambda: self.master.checkbox_toggle(player, "scenate_fatte"), 
-                                                                             variable=scenate_fatte_cb, onvalue=3  , offvalue=-3)
+                                                                             variable=scenate_fatte_cb, onvalue=3  , offvalue=-2)
         self.players_id[player.id]['scenate_fatte_3'].grid(row=self.player_row, column=13, padx=0, pady=0, sticky="w")
 
         # 1 CTkCheckBox Necrologio
         self.players_id[player.id]['necrologio'] = customtkinter.CTkCheckBox(self, text="", width=1, 
                                                                              command=lambda: self.master.checkbox_toggle(player, "necrologio"), 
-                                                                             variable=necrologio_cb, onvalue=1  , offvalue=-1)
+                                                                             variable=necrologio_cb, onvalue=True  , offvalue=False)
         self.players_id[player.id]['necrologio'].grid(row=self.player_row, column=14, padx=15, pady=0, sticky="w")
 
         # 1 CTkCheckBox Parole sagge
         self.players_id[player.id]['parole_sagge'] = customtkinter.CTkCheckBox(self, text="", width=1, 
                                                                              command=lambda: self.master.checkbox_toggle(player, "parole_sagge"), 
-                                                                             variable=parole_sagge_cb, onvalue=1  , offvalue=-1)
+                                                                             variable=parole_sagge_cb, onvalue=True  , offvalue=False)
         self.players_id[player.id]['parole_sagge'].grid(row=self.player_row, column=15, padx=15, pady=0, sticky="w")
 
         # 1 CTkCheckBox Mostra scheda
@@ -560,23 +557,34 @@ class Gui(customtkinter.CTk):
             self.show_dialog("Scenate Insufficienti", "Non puoi fare la pennichella, non hai fatto abbastanza scenate!")
 
     def checkbox_toggle(self, player: Player, stat: str):
-        if stat == "fastidio":
-            print(player.id, stat, getattr(self.player_frame.check_box_values.fastidio, f'{player.id}').get())
-            value = getattr(self.player_frame.check_box_values.fastidio, f'{player.id}').get()
-        elif stat == "spocchia":
-            print(player.id, stat, getattr(self.player_frame.check_box_values.spocchia, f'{player.id}').get())
-            value = getattr(self.player_frame.check_box_values.spocchia, f'{player.id}').get()
-        elif stat == "scenate_fatte":
-            print(player.id, stat, getattr(self.player_frame.check_box_values.scenate_fatte , f'{player.id}').get())
-            value = getattr(self.player_frame.check_box_values.scenate_fatte , f'{player.id}').get()
-        elif stat == "necrologio":
-            print(player.id, stat, getattr(self.player_frame.check_box_values.necrologio, f'{player.id}').get())
-            value = getattr(self.player_frame.check_box_values.necrologio, f'{player.id}').get()
-        elif stat == "parole_sagge":
-            print(player.id, stat, getattr(self.player_frame.check_box_values.parole_sagge, f'{player.id}').get())
-            value = getattr(self.player_frame.check_box_values.parole_sagge, f'{player.id}').get()
-        
+        stat_box = getattr(self.player_frame.check_box_values, stat)
+        value = getattr(stat_box, f'{player.id}').get()
+        if stat in ["fastidio", "spocchia", "scenate_fatte"]:
+            # va messo fastidio al valore ottenuto, quando positivo. quando negativo non ne ho idea.
+            if value > 0 :
+                #checkbox selezionato
+                self.last_card_stats = LastCardStats()
+                setattr(self.last_card_stats, stat, 0)
+                setattr(player, stat, value)
+                self.player_frame.update_playerid_stats(player)
+            else:
+                # checkbox deselzionato
+                self.last_card_stats = LastCardStats()
+                setattr(self.last_card_stats, stat, 0)
+                setattr(player, stat, -value)
+                self.player_frame.update_playerid_stats(player)
 
+        else: # "parole_sagge", "necrologio"
+            if value: 
+                self.last_card_stats = LastCardStats()
+                setattr(self.last_card_stats, stat, True)
+                setattr(player, stat, False)
+                self.player_frame.update_playerid_stats(player)
+            else:
+                self.last_card_stats = LastCardStats()
+                setattr(self.last_card_stats, stat, False)
+                setattr(player, stat, False)
+                self.player_frame.update_playerid_stats(player)        
 
     def salva_players(self):
         json_players = [player.__dict__ for player in self.players]
@@ -595,7 +603,6 @@ class Custom_Dialog(customtkinter.CTkToplevel):
 
         altezza = 100
         larghezza = len(text) * 7
-        print(len(text), larghezza)
 
         self.geometry(f"{larghezza}x{altezza}")
         self.title(title)
@@ -604,7 +611,6 @@ class Custom_Dialog(customtkinter.CTkToplevel):
 
         self.label = customtkinter.CTkLabel(self, text=text)
         self.label.pack(padx=20, pady=20)
-
 
 class PlayerSheet(customtkinter.CTkToplevel):
     def __init__(self, player, *args, **kwargs) -> None:
