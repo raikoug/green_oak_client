@@ -18,6 +18,16 @@ Clona e dalla root fai partire la gui
 python ./Libs/guy.py
 ```
 
+## Cambiare le carte
+Se le carte non ti piacciono, puoi sostituirle dalla cartella, se mantiene la nomenclatura non avrai problemi. 
+Nel caso invece tu voglia usare semi diversi dovrai creare (con le stesse chiavi!) un `carte.json` diverso.  
+L'applicazione usa `seme` e `value` per decidere cosa scuccede, puoi avere quanti semi vuoi, ma i valori saranno sempre: 
+- Asso (1)
+- Tre (3)
+- Numeri (4,5,6,7)
+- Figure (8,9,10)
+Altri valori non saranno considerati
+
 # TODO
 - [ ] Anzitutto vorrei mettere quelle dannate carte più vicine fra loro
 - [ ] Una scheda decisamente migliore
