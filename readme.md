@@ -31,7 +31,8 @@ Altri valori non saranno considerati
 # TODO
 - [ ] Anzitutto vorrei mettere quelle dannate carte più vicine fra loro
 - [ ] Una scheda decisamente migliore
-- [ ] Usare un dialog senza input quando l'input non serve..
+- [x] Usare un dialog senza input quando l'input non serve..
+  - [ ] Mostrare il titolo della TopLevel
 - [ ] Pennichella
 - [ ] Leggero refactoring del codice?
 - [ ] Far partire lo script dal main magari...
