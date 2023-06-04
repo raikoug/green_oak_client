@@ -25,9 +25,6 @@ class Player():
 
     def crea_pettegolezzo(self, pettegolezzo: str) -> None:
         self.pettegolezzi.append(pettegolezzo)
-
-    def __json__(self):
-        return json.loads(json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4))
     
     def from_json(json_players) -> list:
         # for each player in json_players cast it to a Player object
@@ -57,7 +54,6 @@ def main():
     player.crea_pettegolezzo('Non sa contare')
     player.crea_pettegolezzo('Le infermiere sono tutte squillo')
 
-    print(player.__json__())
 
 if __name__ == '__main__':
     main()

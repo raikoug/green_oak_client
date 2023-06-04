@@ -1,13 +1,20 @@
-from cards import Card
+
+# Import to matain after flattifying
 from random import choice
-import json
+from json import loads
+
+# Import to to away after flattifying
+#####################
+from cards import Card
+#####################
+
 
 class Mazzo():
-    cards = [ Card(carta['seme'], carta['value'], carta['path']) for carta in json.loads(open("./Assets/carte.json", "r").read())]
+    cards = [ Card(carta['seme'], carta['value'], carta['path']) for carta in loads(open("./Assets/carte.json", "r").read())]
 
     
     def __init__(self):
-        self.cards = list([ Card(carta['seme'], carta['value'], carta['path']) for carta in json.loads(open("./Assets/carte.json", "r").read())])
+        self.cards = list([ Card(carta['seme'], carta['value'], carta['path']) for carta in loads(open("./Assets/carte.json", "r").read())])
     
     def pesca(self) -> None:
         card = choice([ carta for carta in self.cards if not carta.pescata])

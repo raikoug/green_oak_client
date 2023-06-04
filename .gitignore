@@ -3,3 +3,7 @@ __pycache__/
 *.py[cod]
 tests/
 readme.md
+build
+dist
+flat.spec
+flat.py
