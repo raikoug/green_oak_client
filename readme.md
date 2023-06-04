@@ -27,11 +27,11 @@ L'applicazione usa `seme` e `value` per decidere cosa scuccede, puoi avere quant
 Altri valori non saranno considerati
 
 # TODO
-- [ ] [#1](/../../issues/1)
-- [ ] Una scheda decisamente migliore
-- [x] Allineare i checkbox alla scheda, evitare situazioni strane (per esempio [ ][x][ ][x] che non avrebbe alcun senso)
-- [x] Usare un dialog senza input quando l'input non serve..
-  - [x] Mostrare il titolo della TopLevel
-- [ ] Pennichella
-- [ ] Leggero refactoring del codice?
-- [ ] Far partire lo script dal main magari...
+- [ ] [Le carte sono messe malissimo](/../../issues/1)
+- [ ] [La scheda del giocatore è incompleta ed inguardabile](/../../issues/2)
+- [x] [Allineare i checkbox alla scheda, evitare situazioni strane (per esempio [ ][x][ ][x] che non avrebbe alcun senso)](/../../issues/3)
+- [x] [Usare un dialog input quando l'input non serve](/../../issues/4)
+  - [x] [Mostrare il titolo della TopLevel](/../../issues/5)
+- [x] [Pennichella](/../../issues/6)
+- [ ] [Leggero refactoring del codice?](/../../issues/7)
+- [ ] [Far partire lo script dal main magari...](/../../issues/8)
