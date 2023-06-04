@@ -432,6 +432,15 @@ class Gui(customtkinter.CTk):
         self.briscola = self.mazzo.last_card
         self.mazzo.pesca()
 
+        self.my_font_bold = customtkinter.CTkFont(family="Helvetica", size=13, weight="bold")
+
+        # create some fonts for titles, description, bad things and good things
+        self.my_font_title = customtkinter.CTkFont(family="Helvetica", size=15, weight="bold")
+        self.my_font_description = customtkinter.CTkFont(family="Helvetica", size=13, weight="bold")
+        self.my_font_bad = customtkinter.CTkFont(family="Helvetica", size=13, weight="bold")
+        self.my_font_good = customtkinter.CTkFont(family="Helvetica", size=13, weight="bold")
+
+
 
         customtkinter.set_appearance_mode("System")  # Modes: system (default), light, dark
         customtkinter.set_default_color_theme("green")  # Themes: blue (default), dark-blue, green
@@ -452,7 +461,13 @@ class Gui(customtkinter.CTk):
         self.player_frame = players_frame(self)
         self.player_frame.grid(row=1, column=0, sticky="nsew", pady=10, padx=10, columnspan=COLUMNS)
 
-        self.players = list()
+        self.load_players()
+        
+        
+        self.card_frame = card_frame(self)
+        self.card_frame.grid(row=0, column=0, sticky="nsew", pady=10, padx=10, columnspan=COLUMNS-1)
+   
+    def load_players(self):
         if "players.json" in listdir():
             json_players = json.loads(open("players.json", "r").read())
             self.players = Player.from_json(json_players)
@@ -461,10 +476,9 @@ class Gui(customtkinter.CTk):
                 self.player_frame.add_player(player)
                 self.last_card_stats = LastCardStats()
                 self.player_frame.update_playerid_stats(player)
-        
-        self.card_frame = card_frame(self)
-        self.card_frame.grid(row=0, column=0, sticky="nsew", pady=10, padx=10, columnspan=COLUMNS-1)
-   
+        else:
+            self.players = list()
+    
     def create_player(self) -> None:
         player_id = len(self.players) + 1
         # Get Player Nome
@@ -616,37 +630,114 @@ class PlayerSheet(customtkinter.CTkToplevel):
     def __init__(self, player, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
     
-        self.geometry("00x500")
+        self.geometry("700x500")
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(0, weight=1)
+        self.grid_columnconfigure(1, weight=1)
+        self.grid_rowconfigure(1, weight=1)
+        self.grid_rowconfigure(2, weight=1)
+
+
         COLUMNS = 2
-        self.title(f"Scheda di {player.name} {player.cognome}")
 
-        self.head = customtkinter.CTkLabel(self, text=f"EX {player.ex}, {player.pensionato} in pensione, con l'hobby del {player.hobby}", fg_color="gray30", corner_radius=6)
-        self.head.grid(row=0, column=0, pady=5, padx=5, sticky="ew", columnspan=COLUMNS)
+        name = player.name
+        fastidio = player.fastidio
+        scenata = "Sì" if player.scenata else "No"
+        spocchia = player.spocchia
+        pettegolezzi = player.pettegolezzo
+        scenate_fatte = player.scenate_fatte
+        necrologio = "Sì" if player.necrologio else "No"
+        parole_sagge = "Sì" if player.parole_sagge else "No"
+        pettegolezzi = player.pettegolezzi
+        cognome = player.cognome
+        soprannome = player.soprannome
+        ex = player.ex
+        pensionato = player.pensionato
+        hobby = player.hobby
+        circolo = player.circolo
+        id = player.id
+        
+        self.title(f"Scheda di {name} {cognome}")
 
-        # a frame all to the right that will containe nome, cognome, soprannome, circolo
-        self.player_info_frame = customtkinter.CTkFrame(self)
-        self.player_info_frame.grid(row=1, column=COLUMNS, sticky="n")
+        self.top_frame = customtkinter.CTkFrame(master = self)
+        self.top_frame.grid(row=0, column=0, sticky="ew", padx=5, pady= 5, columnspan=COLUMNS)
 
-        self.name = customtkinter.CTkLabel(self.player_info_frame, text=f"Nome: {player.name}", fg_color="gray30", corner_radius=6)
-        self.name.grid(row=0, column=0, pady=5, padx=5, sticky="ew")
-        self.cognome = customtkinter.CTkLabel(self.player_info_frame, text=f"Cognome: {player.cognome}", fg_color="gray30", corner_radius=6)
-        self.cognome.grid(row=1, column=0, pady=5, padx=5, sticky="ew")
-        self.soprannome = customtkinter.CTkLabel(self.player_info_frame, text=f"Soprannome: {player.soprannome}", fg_color="gray30", corner_radius=6)
-        self.soprannome.grid(row=2, column=0, pady=5, padx=5, sticky="ew")
-        self.circolo = customtkinter.CTkLabel(self.player_info_frame, text=f"Circolo: {player.circolo}", fg_color="gray30", corner_radius=6)
-        self.circolo.grid(row=3, column=0, pady=5, padx=5, sticky="ew")
+        self.top_frame_titolo = customtkinter.CTkLabel(master=self.top_frame, text=f"{name} {cognome}, ex {ex}, {pensionato} in pensione, con l'hobby del {hobby}",
+                                              font = self.master.my_font_title, text_color="purple")
 
-        # a frame in position row 1 column 0 that will containe the player status
-        self.player_status_frame = customtkinter.CTkFrame(self)
-        self.player_status_frame.grid(row=1, column=0, sticky="n")
-        # fastidio level
-        self.fastidio = customtkinter.CTkLabel(self.player_status_frame, text=f"Fastidio: {player.fastidio}", fg_color="gray30", corner_radius=6)
-        self.fastidio.grid(row=0, column=0, pady=5, padx=5, sticky="ew")
-        # spocchia level
-        self.spocchia = customtkinter.CTkLabel(self.player_status_frame, text=f"Spocchia: {player.spocchia}", fg_color="gray30", corner_radius=6)
-        self.spocchia.grid(row=1, column=0, pady=5, padx=5, sticky="ew")
+        self.top_frame_titolo.grid(row=0, column=0, sticky="ew", padx=5, pady= 5, columnspan=COLUMNS)
+        
+
+        self.fastidio_spocchia = customtkinter.CTkFrame(master=self)
+        self.fastidio_spocchia.grid(row=1, column=0, sticky="ew", padx=5, pady= 5)
+        fastidio_spocchia_i = 0
+
+        self.fastidio_spocchia_titolo = customtkinter.CTkLabel(master=self.fastidio_spocchia, text="Fastidio e Spocchia", font = self.master.my_font_title, text_color="cyan")
+        self.fastidio_spocchia_titolo.grid(row=fastidio_spocchia_i, column=0, sticky="ew", columnspan=COLUMNS)
+        fastidio_spocchia_i += 1
+
+        self.fastidio_spocchia_fastidio = customtkinter.CTkLabel(master=self.fastidio_spocchia, text=f"Fastidio: {fastidio}", font = self.master.my_font_description , text_color="white")
+        self.fastidio_spocchia_fastidio.grid(row=fastidio_spocchia_i, column=0, sticky="ew", columnspan=COLUMNS)
+        fastidio_spocchia_i += 1
+
+        if fastidio == 4:
+            self.fastidio_spocchia_scenata_fatta = customtkinter.CTkLabel(master=self.fastidio_spocchia, text=f"Scenata fatta?: {scenata}", font = self.master.my_font_description , text_color="white")
+            self.fastidio_spocchia_scenata_fatta.grid(row=fastidio_spocchia_i, column=0, sticky="ew", columnspan=COLUMNS)
+            fastidio_spocchia_i += 1
+
+        self.fastidio_spocchia_spocchia = customtkinter.CTkLabel(master=self.fastidio_spocchia, text=f"Spocchia: {spocchia}", font = self.master.my_font_description , text_color="white")
+        self.fastidio_spocchia_spocchia.grid(row=fastidio_spocchia_i, column=0, sticky="ew", columnspan=COLUMNS)
+        fastidio_spocchia_i += 1
+
+
+        self.fastidio_spocchia_scenate_fatte = customtkinter.CTkLabel(master=self.fastidio_spocchia, text=f"Spocchia: {scenate_fatte}", font = self.master.my_font_description , text_color="white")
+        self.fastidio_spocchia_scenate_fatte.grid(row=fastidio_spocchia_i, column=0, sticky="ew", columnspan=COLUMNS)
+        fastidio_spocchia_i += 1
+
+        self.fastidio_spocchia_necrologio = customtkinter.CTkLabel(master=self.fastidio_spocchia, text=f"Necrologio: {necrologio}", font = self.master.my_font_description , text_color="white")
+        self.fastidio_spocchia_necrologio.grid(row=fastidio_spocchia_i, column=0, sticky="ew", columnspan=COLUMNS)
+        fastidio_spocchia_i += 1
+
+        self.fastidio_spocchia_parole_sagge = customtkinter.CTkLabel(master=self.fastidio_spocchia, text=f"Parole Sagge: {parole_sagge}", font = self.master.my_font_description , text_color="white")
+        self.fastidio_spocchia_parole_sagge.grid(row=fastidio_spocchia_i, column=0, sticky="ew", columnspan=COLUMNS)
+        fastidio_spocchia_i += 1
+
+        
+        self.player_info_frame = customtkinter.CTkFrame(master=self)
+        self.player_info_frame.grid(row=1, column=1, sticky="ew", padx=5, pady= 5)
+
+        self.player_info_frame_titolo = customtkinter.CTkLabel(master=self.player_info_frame, text="Info Personali", font = self.master.my_font_title, text_color="cyan")
+        self.player_info_frame_titolo.grid(row=0, column=0, sticky="ew", columnspan=COLUMNS)
+
+        self.player_info_frame_nome = customtkinter.CTkLabel(master=self.player_info_frame, text=f"Nome: {name}", font = self.master.my_font_description , text_color="white")
+        self.player_info_frame_nome.grid(row=1, column=0, sticky="ew", columnspan=COLUMNS)
+
+        self.player_info_frame_cognome = customtkinter.CTkLabel(master=self.player_info_frame, text=f"Cognome: {cognome}", font = self.master.my_font_description , text_color="white")
+        self.player_info_frame_cognome.grid(row=2, column=0, sticky="ew", columnspan=COLUMNS)
+
+        self.player_info_frame_soprannome = customtkinter.CTkLabel(master=self.player_info_frame, text=f"Soprannome: {soprannome}", font = self.master.my_font_description , text_color="white")
+        self.player_info_frame_soprannome.grid(row=3, column=0, sticky="ew", columnspan=COLUMNS)
+
+        self.player_info_frame_circolo = customtkinter.CTkLabel(master=self.player_info_frame, text=f"Circolo: {circolo}", font = self.master.my_font_description , text_color="white")
+        self.player_info_frame_circolo.grid(row=4, column=0, sticky="ew", columnspan=COLUMNS)
+
+        self.pettegolezzi_frame = customtkinter.CTkFrame(master=self)
+        self.pettegolezzi_frame.grid(row=2, column=0, sticky="ew", padx=5, pady= 5, columnspan=COLUMNS)
+
+        self.pttegolezzi_titolo = customtkinter.CTkLabel(master=self.pettegolezzi_frame, text="Pettegolezzi", font = self.master.my_font_title, text_color="cyan")
+        self.pttegolezzi_titolo.grid(row=0, column=0, sticky="ew", padx=5, pady= 5, columnspan=COLUMNS)
+
+        for i, pettegolezzo in enumerate(pettegolezzi):
+            self.pettegolezzi_frame_pettegolezzo = customtkinter.CTkLabel(master=self.pettegolezzi_frame, text=f"{pettegolezzo}", font = self.master.my_font_description , text_color="white")
+            self.pettegolezzi_frame_pettegolezzo.grid(row=i+1, column=0, sticky="ew", padx=5, pady= 5, columnspan=COLUMNS)
+
+
+
+
+
+
+
+
 
 if __name__ == "__main__":
     app = Gui()

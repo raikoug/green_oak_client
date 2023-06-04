@@ -9,7 +9,9 @@
     "necrologio": false,
     "parole_sagge": false,
     "pettegolezzi": [
-      "Sono un calabrone!"
+      "Sono un calabrone!",
+      "Potrei essere anche una falena",
+      "sono definitivamente un calabrone!"
     ],
     "cognome": "congome 1",
     "soprannome": "pio",
@@ -21,7 +23,7 @@
   },
   {
     "name": "paolo",
-    "fastidio": 0,
+    "fastidio": 4,
     "scenata": false,
     "spocchia": 2,
     "pettegolezzo": false,
