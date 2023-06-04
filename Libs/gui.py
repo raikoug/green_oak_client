@@ -377,7 +377,9 @@ class Gui(customtkinter.CTk):
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(0, weight=1)
 
-        
+        # TopLevel windows init
+        self.custom_dialog_window = None
+        self.toplevel_window = None
 
 
         self.command_frame = command_frame(self, "Comandi")
@@ -398,7 +400,6 @@ class Gui(customtkinter.CTk):
         
         self.card_frame = card_frame(self)
         self.card_frame.grid(row=0, column=0, sticky="nsew", pady=10, padx=10, columnspan=COLUMNS-1)
-
    
     def create_player(self) -> None:
         player_id = len(self.players) + 1
@@ -432,13 +433,11 @@ class Gui(customtkinter.CTk):
 
         self.add_player(Player(nome, cognome, soprannome, ex, pensionato, hobby, circolo, player_id))
 
-    
     def add_player(self, player: Player) -> None:
         self.players.append(player)
         self.player_frame.add_player(player)
 
     def show_player_sheet(self, player: Player):
-            self.toplevel_window = None
             if self.toplevel_window is None or not self.toplevel_window.winfo_exists():
                 self.toplevel_window = PlayerSheet(player, self)  # create window if its None or destroyed
             else:
@@ -461,9 +460,9 @@ class Gui(customtkinter.CTk):
     
     def scenata(self, player: Player):
         if player.scenate_fatte == 3:
-            customtkinter.CTkInputDialog(text="Non puoi fare scenate! Vai a nanna!", title="Non hai più scenate!")
+            self.show_dialog("Scenate finite", "Non puoi fare scenate! Vai a nanna!")
         elif not player.fastidio == 4:
-            customtkinter.CTkInputDialog(text="Non puoi fare scenate, Non ti hanno ancora infastidito abbstanza!", title="Non hai più scenate!")
+            self.show_dialog("Scenate finite", "Non puoi fare scenate, Non ti hanno ancora infastidito abbstanza!")
         else:
             player.fastidio = 0
             player.scenate_fatte += 1
@@ -473,7 +472,7 @@ class Gui(customtkinter.CTk):
 
     def pettegolezzo(self, player: Player):
         if not player.spocchia == 4:
-            customtkinter.CTkInputDialog(text="Non puoi fare pettegolezzi, non hai ancora accumlato abbstanza spocchia!", title="Non hai più pettegolezzi!")
+            self.show_dialog("Pettegolezzi finiti", "Non puoi fare pettegolezzi, non hai ancora accumlato abbstanza spocchia!")
         else:
             player.spocchia = 0
             self.last_card_stats = LastCardStats()
@@ -485,10 +484,27 @@ class Gui(customtkinter.CTk):
     def salva_players(self):
         json_players = [player.__dict__ for player in self.players]
         open('players.json', 'w').write(json.dumps(json_players, indent=2))
-        customtkinter.CTkInputDialog(text="Salvataggio avvenuto con successo!", title="Salvato!")
+        self.show_dialog("Salvataggio avvenuto con successo!", "Salvato!")
 
-        
+    def show_dialog(self, title, text):
+        if self.custom_dialog_window is None or not self.custom_dialog_window.winfo_exists():
+            self.custom_dialog_window = Custom_Dialog(text, title, self)  # create window if its None or destroyed
+        else:
+            self.custom_dialog_window.focus()  # if window exists focus it
 
+class Custom_Dialog(customtkinter.CTkToplevel):
+    def __init__(self, text, title, *args, **kwargs) -> None:
+        super().__init__(*args, **kwargs)
+
+        altezza = 100
+        larghezza = len(text) * 7 
+        self.geometry(f"{larghezza}x{altezza}")
+        self.geometry("150x50")
+        self.grid_columnconfigure(0, weight=1)
+        self.grid_rowconfigure(0, weight=1)
+
+        self.label = customtkinter.CTkLabel(self, text=text)
+        self.label.pack(padx=20, pady=20)
 
 
 class PlayerSheet(customtkinter.CTkToplevel):
