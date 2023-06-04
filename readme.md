@@ -27,7 +27,7 @@ L'applicazione usa `seme` e `value` per decidere cosa scuccede, puoi avere quant
 Altri valori non saranno considerati
 
 # TODO
-- [ ] [Le carte sono messe malissimo](/../../issues/1)
+- [x] [Le carte sono messe malissimo](/../../issues/1)
 - [x] [La scheda del giocatore è incompleta ed inguardabile](/../../issues/2)
   - [ ] [Fare una scheda leggermente più guardabile?](/../../issues/9)
 - [x] [Allineare i checkbox alla scheda, evitare situazioni strane (per esempio [ ][x][ ][x] che non avrebbe alcun senso)](/../../issues/3)

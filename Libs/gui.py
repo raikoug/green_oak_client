@@ -298,22 +298,57 @@ class card_frame(customtkinter.CTkFrame):
     def __init__(self, master):
         super().__init__(master)
         self.grid_columnconfigure(0, weight=1)
+        self.grid_columnconfigure(1, weight=1)
+        self.grid_columnconfigure(2, weight=1)
         self.grid_rowconfigure(0, weight=1)
+        self.grid_rowconfigure(1, weight=1)
 
         #crea a frame on the left to show the briscola card
         self.briscola_frame = customtkinter.CTkFrame(self)
-        self.briscola_frame.grid(row=0, column=0, sticky="w", padx=10, pady=10)
+        self.briscola_frame.grid(row=0, column=0, sticky="ew", padx=10, pady=10)
+        
+        # init gird for self.briscola_frame
+        self.briscola_frame.grid_columnconfigure(0, weight=1)
+        self.briscola_frame.grid_rowconfigure(0, weight=1)
+        
+        
         self.show_briscola_card()
 
         #crea a frame on the right to show the cards of the player
         self.player_frame = customtkinter.CTkFrame(self)
-        self.player_frame.grid(row=0, column=1, sticky="w", padx=10, pady=10)
+        self.player_frame.grid(row=0, column=1, sticky="ew", padx=10, pady=10)
+        self.player_frame.grid_columnconfigure(0, weight=1)
+        self.player_frame.grid_rowconfigure(0, weight=1)
+
         self.show_player_cards(self.master.mazzo.last_card)
 
         # crea un fram con le informazioni sulla carta pescata
         self.info_frame = customtkinter.CTkFrame(self)
-        self.info_frame.grid(row=0, column=2, sticky="w", padx=10, pady=10)
+        self.info_frame.grid(row=0, column=2, sticky="ew", padx=10, pady=10)
+        self.info_frame.grid_columnconfigure(0, weight=1)
+        self.info_frame.grid_rowconfigure(0, weight=1)
+
         self.show_info_card(self.master.mazzo.last_card)
+
+        # crea un frame dove metterò il numero di carte del mazzo rimaste
+        self.mazzo_frame = customtkinter.CTkFrame(self)
+        self.mazzo_frame.grid(row=1, column=0, sticky="ns", padx=5, pady=5, columnspan=3)
+
+        self.mazzo_frame.grid_columnconfigure(0, weight=1)
+        self.mazzo_frame.grid_rowconfigure(0, weight=1)
+
+
+        self.show_info_mazzo()
+
+    def show_info_mazzo(self):
+        # remove all widgets from the frame
+        for widget in self.mazzo_frame.winfo_children():
+            widget.destroy()
+
+        # crea un label con il numero di carte rimaste nel mazzo
+        mazzo_label = customtkinter.CTkLabel(self.mazzo_frame, text=f"Carte ancora nel mazzo: {self.master.mazzo.carte_rimaste()}",
+                                             font = self.master.my_font_description, text_color='cyan')
+        mazzo_label.grid(row=0, column=0, sticky="nsew", padx=5, pady=5)
     
     def show_info_card(self, card):
         # remove all widgets from the frame
@@ -406,7 +441,6 @@ class card_frame(customtkinter.CTkFrame):
                 necrologio.grid(row=i, column=0, sticky="nsew", padx=10, pady=10)
                 i += 1
 
-
     def show_briscola_card(self):    
         my_image = customtkinter.CTkImage(light_image=Image.open(self.master.briscola.path),
                                   dark_image=Image.open(self.master.briscola.path),
@@ -420,7 +454,6 @@ class card_frame(customtkinter.CTkFrame):
                                   size=(177, 285))
         image_label = customtkinter.CTkLabel(self.player_frame, image=my_image, text="")
         image_label.grid(row=0, column=0, sticky="nsew", padx=10, pady=10)
-
 
 class Gui(customtkinter.CTk):
     def __init__(self, *args, **kwargs) -> None:
@@ -526,6 +559,7 @@ class Gui(customtkinter.CTk):
         self.mazzo.pesca()
         self.briscola = self.mazzo.last_card
         self.card_frame.show_briscola_card()
+        self.card_frame.show_info_mazzo()
 
     def pesca(self, player=None):
         self.mazzo.pesca()
@@ -535,6 +569,8 @@ class Gui(customtkinter.CTk):
         
         if player is not None:
             self.player_frame.update_playerid_stats(player)
+        
+        self.card_frame.show_info_mazzo()
     
     def scenata(self, player: Player):
         if player.scenate_fatte == 3:
