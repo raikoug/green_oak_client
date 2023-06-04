@@ -20,6 +20,8 @@ python ./Libs/guy.py
 
 # TODO
 - [ ] Anzitutto vorrei mettere quelle dannate carte più vicine fra loro
+- [ ] Una scheda decisamente migliore
+- [ ] Usare un dialog senza input quando l'input non serve..
 - [ ] Pennichella
 - [ ] Leggero refactoring del codice?
 - [ ] Far partire lo script dal main magari...

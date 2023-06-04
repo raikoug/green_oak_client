@@ -230,8 +230,6 @@ class players_frame(customtkinter.CTkFrame):
             self.players_id[player.id]['scenate_fatte_3'].deselect()
             
 
-        
-
 class card_frame(customtkinter.CTkFrame):
     def __init__(self, master):
         super().__init__(master)
@@ -401,8 +399,7 @@ class Gui(customtkinter.CTk):
         self.card_frame = card_frame(self)
         self.card_frame.grid(row=0, column=0, sticky="nsew", pady=10, padx=10, columnspan=COLUMNS-1)
 
-
-     
+   
     def create_player(self) -> None:
         player_id = len(self.players) + 1
         # Get Player Nome
@@ -483,11 +480,13 @@ class Gui(customtkinter.CTk):
             self.last_card_stats.spocchia = -(player.spocchia)
             self.player_frame.update_playerid_stats(player)
             pettegolezzo = customtkinter.CTkInputDialog(text="Hai dirtto a creare un nuovo pettegolezzo:", title="Pettegolezzo")
-            player.crea_pettegolezzo(pettegolezzo)
+            player.crea_pettegolezzo(pettegolezzo.get_input())
 
     def salva_players(self):
-        json_players = [player.__json__() for player in self.players]
+        json_players = [player.__dict__ for player in self.players]
         open('players.json', 'w').write(json.dumps(json_players, indent=2))
+        customtkinter.CTkInputDialog(text="Salvataggio avvenuto con successo!", title="Salvato!")
+
         
 
 
