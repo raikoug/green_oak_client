@@ -2,8 +2,6 @@
 Green Oak è un gioco di ruolo che si può acquistare qua  
 https://www.msedizioni.it/prodotto/green-oaks/
 
-
-
 # A cosa serve
 Vuoi giocare a Green Oak ma siete su Discord?  
 L'applicazione Badante non è un granché, quindi ho fatto un client per rendere più facile giocarci.
@@ -37,5 +35,3 @@ Altri valori non saranno considerati
 - [ ] Pennichella
 - [ ] Leggero refactoring del codice?
 - [ ] Far partire lo script dal main magari...
-
-
