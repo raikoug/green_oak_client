@@ -32,7 +32,7 @@ Altri valori non saranno considerati
 - [ ] Anzitutto vorrei mettere quelle dannate carte più vicine fra loro
 - [ ] Una scheda decisamente migliore
 - [x] Usare un dialog senza input quando l'input non serve..
-  - [ ] Mostrare il titolo della TopLevel
+  - [x] Mostrare il titolo della TopLevel
 - [ ] Pennichella
 - [ ] Leggero refactoring del codice?
 - [ ] Far partire lo script dal main magari...

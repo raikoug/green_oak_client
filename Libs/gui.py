@@ -488,18 +488,20 @@ class Gui(customtkinter.CTk):
 
     def show_dialog(self, title, text):
         if self.custom_dialog_window is None or not self.custom_dialog_window.winfo_exists():
-            self.custom_dialog_window = Custom_Dialog(text, title, self)  # create window if its None or destroyed
+            self.custom_dialog_window = Custom_Dialog(title, text, self) 
         else:
             self.custom_dialog_window.focus()  # if window exists focus it
 
 class Custom_Dialog(customtkinter.CTkToplevel):
-    def __init__(self, text, title, *args, **kwargs) -> None:
+    def __init__(self, title, text, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
 
         altezza = 100
-        larghezza = len(text) * 7 
+        larghezza = len(text) * 7
+        print(len(text), larghezza)
+
         self.geometry(f"{larghezza}x{altezza}")
-        self.geometry("150x50")
+        self.title(title)
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(0, weight=1)
 
@@ -515,6 +517,7 @@ class PlayerSheet(customtkinter.CTkToplevel):
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(0, weight=1)
         COLUMNS = 2
+        self.title(f"Scheda di {player.name} {player.cognome}")
 
         self.head = customtkinter.CTkLabel(self, text=f"EX {player.ex}, {player.pensionato} in pensione, con l'hobby del {player.hobby}", fg_color="gray30", corner_radius=6)
         self.head.grid(row=0, column=0, pady=5, padx=5, sticky="ew", columnspan=COLUMNS)
