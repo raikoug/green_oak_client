@@ -27,7 +27,7 @@ L'applicazione usa `seme` e `value` per decidere cosa scuccede, puoi avere quant
 Altri valori non saranno considerati
 
 # TODO
-- [ ] #1
+- [ ] [#1](/../../issues/1)
 - [ ] Una scheda decisamente migliore
 - [x] Allineare i checkbox alla scheda, evitare situazioni strane (per esempio [ ][x][ ][x] che non avrebbe alcun senso)
 - [x] Usare un dialog senza input quando l'input non serve..
