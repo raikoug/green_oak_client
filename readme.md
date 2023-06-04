@@ -28,7 +28,8 @@ Altri valori non saranno considerati
 
 # TODO
 - [ ] [Le carte sono messe malissimo](/../../issues/1)
-- [ ] [La scheda del giocatore è incompleta ed inguardabile](/../../issues/2)
+- [x] [La scheda del giocatore è incompleta ed inguardabile](/../../issues/2)
+  - [ ] [Fare una scheda leggermente più guardabile?](/../../issues/9)
 - [x] [Allineare i checkbox alla scheda, evitare situazioni strane (per esempio [ ][x][ ][x] che non avrebbe alcun senso)](/../../issues/3)
 - [x] [Usare un dialog input quando l'input non serve](/../../issues/4)
   - [x] [Mostrare il titolo della TopLevel](/../../issues/5)
