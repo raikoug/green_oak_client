@@ -6,13 +6,14 @@ from cards import Card
 from mazzo import Mazzo
 from os import listdir
 
-COLUMNS = 17
+COLUMNS = 19
 
 class LastCardStats():
     spocchia = 0
     fastidio = 0
     parole_sagge = False
     necrologio = False
+    scenate_fatte = 0
     pass
 
 class command_frame(customtkinter.CTkFrame):
@@ -75,24 +76,67 @@ class players_frame(customtkinter.CTkFrame):
 
         self.head_mostra_player_sheet = customtkinter.CTkLabel(self, text="Scheda")
         self.head_mostra_player_sheet.grid(row=0, column=16, padx=10, pady=(10, 0), sticky="w")
+
+        self.head_pesca_carta = customtkinter.CTkLabel(self, text="Pesca")
+        self.head_pesca_carta.grid(row=0, column=17, padx=10, pady=(10, 0), sticky="w")
+
+        self.head_pennichella = customtkinter.CTkLabel(self, text="Pennichella")
+        self.head_pennichella.grid(row=0, column=18, padx=10, pady=(10, 0), sticky="w")
+
+    class check_box_values:
+        class fastidio:
+            pass
+        class spocchia:
+            pass
+        class scenate_fatte:
+            pass
+        class necrologio:
+            pass
+        class parole_sagge:
+            pass
+
+
     
     def add_player(self, player: Player):
+        setattr(self.check_box_values.fastidio, f'{player.id}', customtkinter.IntVar())
+        setattr(self.check_box_values.spocchia, f'{player.id}', customtkinter.IntVar())
+        setattr(self.check_box_values.scenate_fatte, f'{player.id}', customtkinter.IntVar())
+        setattr(self.check_box_values.necrologio, f'{player.id}', customtkinter.IntVar())
+        setattr(self.check_box_values.parole_sagge, f'{player.id}', customtkinter.IntVar())
+        
+        fastidio_cb = getattr(self.check_box_values.fastidio, f'{player.id}')
+        spocchia_cb = getattr(self.check_box_values.spocchia, f'{player.id}')
+        scenate_fatte_cb = getattr(self.check_box_values.scenate_fatte, f'{player.id}')
+        necrologio_cb = getattr(self.check_box_values.necrologio, f'{player.id}')
+        parole_sagge_cb = getattr(self.check_box_values.parole_sagge, f'{player.id}')
+
+
         self.name = customtkinter.CTkLabel(self, text=player.name)
         self.players_id[player.id] = dict()
 
         # 4 checkbox Fastidio
         self.name.grid(row=self.player_row, column=0, padx=10, pady=(10, 0), sticky="w")
 
-        self.players_id[player.id]['fastidio_1'] = customtkinter.CTkCheckBox(self, text="", width=1)
+
+
+        self.players_id[player.id]['fastidio_1'] = customtkinter.CTkCheckBox(self, text="", width=1, 
+                                                                             command=lambda: self.master.checkbox_toggle(player, "fastidio"), 
+                                                                             variable=fastidio_cb, onvalue=1  , offvalue=-1)
         self.players_id[player.id]['fastidio_1'].grid(row=self.player_row, column=1, padx=0, pady=0, sticky="w")
 
-        self.players_id[player.id]['fastidio_2'] = customtkinter.CTkCheckBox(self, text="", width=1)
+        self.players_id[player.id]['fastidio_2'] = customtkinter.CTkCheckBox(self, text="", width=1, 
+                                                                             command=lambda: self.master.checkbox_toggle(player, "fastidio"), 
+                                                                             variable=fastidio_cb, onvalue=2  , offvalue=-2)
         self.players_id[player.id]['fastidio_2'].grid(row=self.player_row, column=2, padx=0, pady=0, sticky="w")
 
-        self.players_id[player.id]['fastidio_3'] = customtkinter.CTkCheckBox(self, text="", width=1)
+        self.players_id[player.id]['fastidio_3'] = customtkinter.CTkCheckBox(self, text="", width=1, 
+                                                                             command=lambda: self.master.checkbox_toggle(player, "fastidio"), 
+                                                                             variable=fastidio_cb, onvalue=3  , offvalue=-3)
         self.players_id[player.id]['fastidio_3'].grid(row=self.player_row, column=3, padx=0, pady=0, sticky="w")
 
-        self.players_id[player.id]['fastidio_4'] = customtkinter.CTkCheckBox(self, text="", width=1)
+        self.players_id[player.id]['fastidio_4'] = customtkinter.CTkCheckBox(self, text="", width=1, 
+                                                                             command=lambda: self.master.checkbox_toggle(player, "fastidio"), 
+                                                                             variable=fastidio_cb, onvalue=4  , offvalue=-4)
         self.players_id[player.id]['fastidio_4'].grid(row=self.player_row, column=4, padx=0, pady=0, sticky="w")
 
         # 1 CTkCheckBox Scenata
@@ -100,13 +144,21 @@ class players_frame(customtkinter.CTkFrame):
         self.players_id[player.id]['scenata'].grid(row=self.player_row, column=5, padx=15, pady=0, sticky="w")
 
         # 4 CTkCheckBox Spocchia
-        self.players_id[player.id]['spocchia_1'] = customtkinter.CTkCheckBox(self, text="", width=1)
+        self.players_id[player.id]['spocchia_1'] = customtkinter.CTkCheckBox(self, text="", width=1, 
+                                                                             command=lambda: self.master.checkbox_toggle(player, "spocchia"), 
+                                                                             variable=spocchia_cb, onvalue=1  , offvalue=-1)
         self.players_id[player.id]['spocchia_1'].grid(row=self.player_row, column=6, padx=0, pady=0, sticky="w")
-        self.players_id[player.id]['spocchia_2'] = customtkinter.CTkCheckBox(self, text="", width=1)
+        self.players_id[player.id]['spocchia_2'] = customtkinter.CTkCheckBox(self, text="", width=1, 
+                                                                             command=lambda: self.master.checkbox_toggle(player, "spocchia"), 
+                                                                             variable=spocchia_cb, onvalue=2  , offvalue=-2)
         self.players_id[player.id]['spocchia_2'].grid(row=self.player_row, column=7, padx=0, pady=0, sticky="w")
-        self.players_id[player.id]['spocchia_3'] = customtkinter.CTkCheckBox(self, text="", width=1)
+        self.players_id[player.id]['spocchia_3'] = customtkinter.CTkCheckBox(self, text="", width=1, 
+                                                                             command=lambda: self.master.checkbox_toggle(player, "spocchia"), 
+                                                                             variable=spocchia_cb, onvalue=3  , offvalue=-3)
         self.players_id[player.id]['spocchia_3'].grid(row=self.player_row, column=8, padx=0, pady=0, sticky="w")
-        self.players_id[player.id]['spocchia_4'] = customtkinter.CTkCheckBox(self, text="", width=1)
+        self.players_id[player.id]['spocchia_4'] = customtkinter.CTkCheckBox(self, text="", width=1, 
+                                                                             command=lambda: self.master.checkbox_toggle(player, "spocchia"), 
+                                                                             variable=spocchia_cb, onvalue=4  , offvalue=-4)
         self.players_id[player.id]['spocchia_4'].grid(row=self.player_row, column=9, padx=0, pady=0, sticky="w")
 
         # 1 CTkCheckBox Pettegolezzo
@@ -114,19 +166,29 @@ class players_frame(customtkinter.CTkFrame):
         self.players_id[player.id]['pettegolezzo'].grid(row=self.player_row, column=10, padx=15, pady=0, sticky="w")
 
         # 3 CTkCheckBox Scenate fatte
-        self.players_id[player.id]['scenate_fatte_1'] = customtkinter.CTkCheckBox(self, text="", width=1)
+        self.players_id[player.id]['scenate_fatte_1'] = customtkinter.CTkCheckBox(self, text="", width=1, 
+                                                                             command=lambda: self.master.checkbox_toggle(player, "scenate_fatte"), 
+                                                                             variable=scenate_fatte_cb, onvalue=1  , offvalue=-1)
         self.players_id[player.id]['scenate_fatte_1'].grid(row=self.player_row, column=11, padx=0, pady=0, sticky="w")
-        self.players_id[player.id]['scenate_fatte_2'] = customtkinter.CTkCheckBox(self, text="", width=1)
+        self.players_id[player.id]['scenate_fatte_2'] = customtkinter.CTkCheckBox(self, text="", width=1, 
+                                                                             command=lambda: self.master.checkbox_toggle(player, "scenate_fatte"), 
+                                                                             variable=scenate_fatte_cb, onvalue=2  , offvalue=-2)
         self.players_id[player.id]['scenate_fatte_2'].grid(row=self.player_row, column=12, padx=0, pady=0, sticky="w")
-        self.players_id[player.id]['scenate_fatte_3'] = customtkinter.CTkCheckBox(self, text="", width=1)
+        self.players_id[player.id]['scenate_fatte_3'] = customtkinter.CTkCheckBox(self, text="", width=1, 
+                                                                             command=lambda: self.master.checkbox_toggle(player, "scenate_fatte"), 
+                                                                             variable=scenate_fatte_cb, onvalue=3  , offvalue=-3)
         self.players_id[player.id]['scenate_fatte_3'].grid(row=self.player_row, column=13, padx=0, pady=0, sticky="w")
 
         # 1 CTkCheckBox Necrologio
-        self.players_id[player.id]['necrologio'] = customtkinter.CTkCheckBox(self, text="", width=1)
+        self.players_id[player.id]['necrologio'] = customtkinter.CTkCheckBox(self, text="", width=1, 
+                                                                             command=lambda: self.master.checkbox_toggle(player, "necrologio"), 
+                                                                             variable=necrologio_cb, onvalue=1  , offvalue=-1)
         self.players_id[player.id]['necrologio'].grid(row=self.player_row, column=14, padx=15, pady=0, sticky="w")
 
         # 1 CTkCheckBox Parole sagge
-        self.players_id[player.id]['parole_sagge'] = customtkinter.CTkCheckBox(self, text="", width=1)
+        self.players_id[player.id]['parole_sagge'] = customtkinter.CTkCheckBox(self, text="", width=1, 
+                                                                             command=lambda: self.master.checkbox_toggle(player, "parole_sagge"), 
+                                                                             variable=parole_sagge_cb, onvalue=1  , offvalue=-1)
         self.players_id[player.id]['parole_sagge'].grid(row=self.player_row, column=15, padx=15, pady=0, sticky="w")
 
         # 1 CTkCheckBox Mostra scheda
@@ -136,6 +198,9 @@ class players_frame(customtkinter.CTkFrame):
         # 1 CTkButton per pescare una carta
         self.players_id[player.id]['pesca_carta'] = customtkinter.CTkButton(self, text="Pesca", width=10, command=lambda: self.master.pesca(player))
         self.players_id[player.id]['pesca_carta'].grid(row=self.player_row, column=17, padx=15, pady=0, sticky="w")
+
+        self.players_id[player.id]['pennichella'] = customtkinter.CTkButton(self, text="Pennichella", width=10, command=lambda: self.master.pennichella(player))
+        self.players_id[player.id]['pennichella'].grid(row=self.player_row, column=18, padx=15, pady=0, sticky="w")
 
         
         self.player_row += 1
@@ -211,6 +276,8 @@ class players_frame(customtkinter.CTkFrame):
             if necrologio:
                 player.necrologio = True
                 self.players_id[player.id]['necrologio'].select()
+
+        player.scenate_fatte = min(3, self.master.last_card_stats.scenate_fatte + player.scenate_fatte)
 
         if player.scenate_fatte == 3:
             self.players_id[player.id]['scenate_fatte_1'].select()
@@ -373,7 +440,7 @@ class Gui(customtkinter.CTk):
         customtkinter.set_default_color_theme("green")  # Themes: blue (default), dark-blue, green
 
         #self.title = "Green Oaks"
-        self.geometry("1200x500")
+        self.geometry("1300x500")
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(0, weight=1)
 
@@ -481,6 +548,36 @@ class Gui(customtkinter.CTk):
             pettegolezzo = customtkinter.CTkInputDialog(text="Hai dirtto a creare un nuovo pettegolezzo:", title="Pettegolezzo")
             player.crea_pettegolezzo(pettegolezzo.get_input())
 
+    def pennichella(self, player: Player):
+        if player.scenate_fatte == 3:
+            player.fastidio = 0
+            player.scenate_fatte = 0
+            self.last_card_stats = LastCardStats()
+            self.last_card_stats.fastidio = -(player.fastidio)
+            self.last_card_stats.scenate_fatte = -(player.scenate_fatte)
+            self.player_frame.update_playerid_stats(player)
+        else:
+            self.show_dialog("Scenate Insufficienti", "Non puoi fare la pennichella, non hai fatto abbastanza scenate!")
+
+    def checkbox_toggle(self, player: Player, stat: str):
+        if stat == "fastidio":
+            print(player.id, stat, getattr(self.player_frame.check_box_values.fastidio, f'{player.id}').get())
+            value = getattr(self.player_frame.check_box_values.fastidio, f'{player.id}').get()
+        elif stat == "spocchia":
+            print(player.id, stat, getattr(self.player_frame.check_box_values.spocchia, f'{player.id}').get())
+            value = getattr(self.player_frame.check_box_values.spocchia, f'{player.id}').get()
+        elif stat == "scenate_fatte":
+            print(player.id, stat, getattr(self.player_frame.check_box_values.scenate_fatte , f'{player.id}').get())
+            value = getattr(self.player_frame.check_box_values.scenate_fatte , f'{player.id}').get()
+        elif stat == "necrologio":
+            print(player.id, stat, getattr(self.player_frame.check_box_values.necrologio, f'{player.id}').get())
+            value = getattr(self.player_frame.check_box_values.necrologio, f'{player.id}').get()
+        elif stat == "parole_sagge":
+            print(player.id, stat, getattr(self.player_frame.check_box_values.parole_sagge, f'{player.id}').get())
+            value = getattr(self.player_frame.check_box_values.parole_sagge, f'{player.id}').get()
+        
+
+
     def salva_players(self):
         json_players = [player.__dict__ for player in self.players]
         open('players.json', 'w').write(json.dumps(json_players, indent=2))
@@ -513,7 +610,7 @@ class PlayerSheet(customtkinter.CTkToplevel):
     def __init__(self, player, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
     
-        self.geometry("500x500")
+        self.geometry("00x500")
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(0, weight=1)
         COLUMNS = 2

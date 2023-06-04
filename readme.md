@@ -31,6 +31,7 @@ Altri valori non saranno considerati
 # TODO
 - [ ] Anzitutto vorrei mettere quelle dannate carte più vicine fra loro
 - [ ] Una scheda decisamente migliore
+- [ ] Allineare i checkbox alla scheda, evitare situazioni strane (per esempio [ ][x][ ][x] che non avrebbe alcun senso)
 - [x] Usare un dialog senza input quando l'input non serve..
   - [x] Mostrare il titolo della TopLevel
 - [ ] Pennichella
